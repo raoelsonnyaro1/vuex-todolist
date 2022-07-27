@@ -57,7 +57,10 @@ const actions = {
   },
 
   async deleteTodo({ commit }, todo) {
-    await axios.delete("https://jsonplaceholder.typicode.com/todos/1");
+    const response = await axios.delete(
+      "https://jsonplaceholder.typicode.com/todos/1"
+    );
+    console.log("response :>> ", response);
     commit("delete_todo", todo);
   },
   // deleteTodo: (store, todo) => {
