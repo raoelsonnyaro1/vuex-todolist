@@ -19,7 +19,7 @@
           <input
             type="button"
             :value="btnSupprimer"
-            @click.prevent="deleteTodo(todo.id)"
+            @click.prevent="deleteTodo(todo)"
           />
         </td>
       </tr>
@@ -59,16 +59,16 @@ export default {
     }),
 
     addTodo() {
-      this.addTodoStore(this.newTodo);
+      this.addTodoStore(newTodo);
       this.newTodo = "";
     },
 
-    updatedTodo() {
-      this.updatedTodoStore(this.todo);
+    updatedTodo(todo) {
+      this.updatedTodoStore(todo);
     },
 
-    deleteTodo() {
-      this.deleteTodoStore(this.todo);
+    deleteTodo(todo) {
+      this.deleteTodoStore(todo);
     },
   },
 

@@ -35,33 +35,44 @@ const mutations = {
     }
   },
 
-  delete_todo: (state, todo) => {
-    state.todos.filter((j) => j !== todo);
-  },
+  // delete_todo: (state, payload) => {
+  // console.log('state :>> ', state.todos);
+  // console.log('payload.id :>> ', payload.id);
+  //   state.todos.filter((j) => j.id === payload.id);
+  // },
 };
 
 const actions = {
-  async fetchTodos({ commit }) {
+  async fetchTodos({
+    commit
+  }) {
     const response = await axios.get(resource_uri);
     commit("setTodos", response.data);
   },
 
-  async addTodo({ commit }, todo) {
+  async addTodo({
+    commit
+  }, todo) {
     const response = await axios.post(resource_uri, todo);
     commit("add_todo", todo);
   },
 
-  async updateTodo({ commit }, todo) {
-    const response = await axios.put("${resource_uri}${todo.id}", todo);
+  async updateTodo({
+    commit
+  }, todo) {
+    const response = await axios.put('${resource_uri}${todo.id}', todo);
     commit("update_todo", response.data);
   },
 
-  async deleteTodo({ commit }, todo) {
+  async deleteTodo({
+    commit,state
+  }, todo) {
     const response = await axios.delete(
       "https://jsonplaceholder.typicode.com/todos/1"
     );
-    console.log("response :>> ", response);
-    commit("delete_todo", todo);
+    const test = [...state.todos];
+    commit("setTodos", test.filter((t) => t.id !== todo.id));
+    // commit("delete_todo", todo);
   },
   // deleteTodo: (store, todo) => {
   //   store.commit("delete_todo", todo);
